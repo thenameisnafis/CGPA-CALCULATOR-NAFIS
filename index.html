@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>AIUB CGPA Calculator</title>
+</head>
+<body>
+    <h1>AIUB CGPA Calculator</h1>
+    <p>Enter your previous CGPA and total credit completed:</p>
+    <table>
+        <tr>
+            <td>Previous CGPA:</td>
+            <td><input type="number" id="previousCGPA" min="0" max="10" step="0.01"></td>
+        </tr>
+        <tr>
+            <td>Total credit completed:</td>
+            <td><input type="number" id="previousCredit" min="0" max="200" step="1"></td>
+        </tr>
+    </table>
+    <p>Enter your current semester total credit and number of courses:</p>
+    <table>
+        <tr>
+            <td>Current semester total credit:</td>
+            <td><input type="number" id="currentTotalCredit" min="0" max="50" step="1"></td>
+        </tr>
+        <tr>
+            <td>Number of courses:</td>
+            <td><input type="number" id="totalCourses" min="0" max="10" step="1"></td>
+        </tr>
+    </table>
+    <button id="addCourses">Add courses</button>
+    <div id="courses"></div>
+    <button id="calculate">Calculate CGPA</button>
+    <p id="result"></p>
+    <div class="ends">
+        <p>Thanks for visiting Nafis's CGPA Calculator</p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
