@@ -1,55 +1,81 @@
+@import url('https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css');
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f0f0f0;
+  background-image: url('bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header {
+  background-color: #002E6D; 
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem; /* Optional: Add spacing above the logo */
+  }
+
+.logo img {
+  height: 60px;
 }
 
 h1 {
-    text-align: center;
-    color: #333;
+  text-align: center;
+  color: #002E6D;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 1rem;
 }
 
 table {
-    border-collapse: collapse;
-    margin: 0 auto;
-    width: 50%;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
 }
 
 th, td {
-    border: 1px solid #999;
-    padding: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.5rem;
 }
 
-input {
-    width: 100%;
-    border: none;
-    outline: none;
-    font-size: 18px;
-    text-align: center;
+input, select {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 0.25rem 0.5rem;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 10px;
-    background-color: #333;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
+  transition: all 0.2s;
 }
 
 button:hover {
-    background-color: #555;
+  filter: brightness(1.1);
 }
 
-p {
-    text-align: center;
-    font-size: 18px;
-    color: #333;
+.ends {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.875rem;
+  color: #333;
 }
 
-#result {
-    font-weight: bold;
+.text-aiub {
+  color: #002E6D;
+}
+
+.bg-aiub-blue {
+  background-color: #002E6D;
 }
