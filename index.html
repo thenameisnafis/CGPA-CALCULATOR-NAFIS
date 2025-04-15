@@ -1,42 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>AIUB CGPA Calculator</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AIUB CGPA Calculator - Nafis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-    <h1>AIUB CGPA Calculator</h1>
-    <p>Enter your previous CGPA and total credit completed:</p>
-    <table>
-        <tr>
-            <td>Previous CGPA:</td>
-            <td><input type="number" id="previousCGPA" min="0" max="10" step="0.01"></td>
-        </tr>
-        <tr>
-            <td>Total credit completed:</td>
-            <td><input type="number" id="previousCredit" min="0" max="200" step="1"></td>
-        </tr>
-    </table>
-    <p>Enter your current semester total credit and number of courses:</p>
-    <table>
-        <tr>
-            <td>Current semester total credit:</td>
-            <td><input type="number" id="currentTotalCredit" min="0" max="50" step="1"></td>
-        </tr>
-        <tr>
-            <td>Number of courses:</td>
-            <td><input type="number" id="totalCourses" min="0" max="10" step="1"></td>
-        </tr>
-    </table>
-    <button id="addCourses">Add courses</button>
-    <div id="courses"></div>
-    <button id="calculate">Calculate CGPA</button>
-    <p id="result"></p>
-    <div class="ends">
-        <p>Thanks for visiting Nafis's CGPA Calculator</p>
+<body class="min-h-screen text-[#003366]">
+    <header class="bg-[#002E6D] text-white py-4 shadow">
+        <div class="max-w-5xl mx-auto flex flex-col items-center px-4">
+          <img src="logo.png" alt="AIUB Logo" class="w-24 h-24" />
+          <h1 class="text-xl font-bold mt-2">AIUB CGPA Calculator</h1>
+        </div>
+      </header>
+
+  <main class="max-w-4xl mx-auto p-6 space-y-6 bg-white bg-opacity-90 rounded-xl shadow-lg mt-6">
+    <section class="p-6 rounded-xl shadow bg-white">
+      <h2 class="text-2xl font-semibold mb-4">Previous Academic Info</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label for="previousCGPA">Previous CGPA:</label>
+          <input type="number" id="previousCGPA" min="0" max="10" step="0.01" />
+        </div>
+        <div>
+          <label for="previousCredit">Total Credit Completed:</label>
+          <input type="number" id="previousCredit" min="0" max="200" step="1" />
+        </div>
+      </div>
+    </section>
+
+    <section class="p-6 rounded-xl shadow bg-white">
+      <h2 class="text-2xl font-semibold mb-4">Current Semester Info</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label for="currentTotalCredit">Total Credit This Semester:</label>
+          <input type="number" id="currentTotalCredit" min="0" max="50" step="1" />
+        </div>
+        <div>
+          <label for="totalCourses">Number of Courses:</label>
+          <input type="number" id="totalCourses" min="0" max="10" step="1" />
+        </div>
+      </div>
+      <div class="mt-4 flex gap-4">
+        <button id="addCourses" class="bg-[#003366] hover:bg-[#002244] text-white px-4 py-2 rounded">Add Courses</button>
+        <select id="templateSelect" class="border px-2 py-1 rounded">
+          <option value="">Semesters</option>
+          <option value="template1">Spring</option>
+          <option value="template2">Summer</option>
+          <option value="template3">Fall</option>
+        </select>
+      </div>
+      <div id="courses" class="mt-4 overflow-x-auto"></div>
+    </section>
+
+    <div class="flex flex-wrap gap-4">
+      <button id="calculate" class="bg-[#003366] hover:bg-[#002244] text-white px-6 py-2 rounded">Calculate CGPA</button>
+      <button id="downloadPDF" class="bg-[#003366] hover:bg-[#002244] text-white px-6 py-2 rounded hidden">Download as PDF</button>
+      <button id="reset" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded">Reset</button>
     </div>
-    <script src="script.js"></script>
+
+    <div id="result" class="text-xl font-bold mt-4"></div>
+    <div id="semesterInfo"></div>
+
+    <section class="p-4 rounded-xl shadow bg-white mt-6">
+      <h3 class="text-lg font-semibold mb-2">AIUB Grade Scale</h3>
+      <table class="table-auto w-full text-left border">
+        <thead class="bg-[#003366] text-white">
+          <tr><th class="p-2">Grade</th><th class="p-2">Points</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="p-2">A+</td><td class="p-2">4.00</td></tr>
+          <tr><td class="p-2">A</td><td class="p-2">3.75</td></tr>
+          <tr><td class="p-2">B+</td><td class="p-2">3.50</td></tr>
+          <tr><td class="p-2">B</td><td class="p-2">3.25</td></tr>
+          <tr><td class="p-2">C+</td><td class="p-2">3.00</td></tr>
+          <tr><td class="p-2">C</td><td class="p-2">2.75</td></tr>
+          <tr><td class="p-2">D+</td><td class="p-2">2.50</td></tr>
+          <tr><td class="p-2">D</td><td class="p-2">2.25</td></tr>
+          <tr><td class="p-2">F</td><td class="p-2">0.00</td></tr>
+          <tr><td class="p-2">I / W / UW</td><td class="p-2">Not Counted</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer class="text-center text-sm text-gray-600 mt-8">
+      Thanks for using Nafis's Enhanced CGPA Calculator. Powered by AIUB Theme.
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('downloadPDF').addEventListener('click', function () {
+      const element = document.body;
+      html2pdf().from(element).set({
+        margin: 0.5,
+        filename: 'AIUB_CGPA_Report.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      }).save();
+    });
+
+    document.getElementById('calculate').addEventListener('click', function () {
+      document.getElementById('downloadPDF').classList.remove('hidden');
+    });
+  </script>
 </body>
 </html>
